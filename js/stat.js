@@ -41,16 +41,16 @@ window.renderStatistics = function (ctx, names, times) {
   var initialX = 130;
   var initialY = 250;
 
-  for (var i = 0; i < times.length; i++) {
+  for (var j = 0; j < times.length; j++) {
     ctx.fillStyle = 'rgba(2, 14, 134, ' + (Math.random() * (1 - 0.1) + 0.1) + ')';
-    if (names[i] === 'Вы') {
+    if (names[j] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
-    ctx.fillRect(initialX + (indent + barWidth) * i, initialY, barWidth, times[i] * -step);
+    ctx.fillRect(initialX + (indent + barWidth) * j, initialY, barWidth, times[j] * -step);
     ctx.fillStyle = 'rgb(0, 0, 0)';
     ctx.textBaseline = 'top';
-    ctx.fillText(names[i], initialX + (indent + barWidth) * i, initialY);
+    ctx.fillText(names[j], initialX + (indent + barWidth) * j, initialY);
     ctx.textBaseline = 'bottom';
-    ctx.fillText(Math.floor(times[i]), initialX + (indent + barWidth) * i, initialY + times[i] * -step);
+    ctx.fillText(Math.floor(times[j]), initialX + (indent + barWidth) * j, initialY + times[j] * -step);
   }
 };
