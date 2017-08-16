@@ -1,6 +1,6 @@
 'use strict';
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'rgb(256, 256, 256)';
   ctx.beginPath();
   ctx.moveTo(100, 10);
@@ -25,13 +25,11 @@ window.renderStatistics = function(ctx, names, times) {
   ctx.fillText('Список результатов:', 120, 60);
 
   var max = -1;
-  var maxIndex = -1;
 
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
       max = time;
-      maxIndex = i;
     }
   }
 
@@ -42,10 +40,10 @@ window.renderStatistics = function(ctx, names, times) {
   var indent = 50;
   var initialX = 130;
   var initialY = 250;
-    debugger;
-  for(var i = 0; i < times.length; i++) {
+
+  for (var i = 0; i < times.length; i++) {
     ctx.fillStyle = 'rgba(2, 14, 134, ' + (Math.random() * (1 - 0.1) + 0.1) + ')';
-    if(names[i] == 'Вы') {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
     ctx.fillRect(initialX + (indent + barWidth) * i, initialY, barWidth, times[i] * -step);
@@ -55,4 +53,4 @@ window.renderStatistics = function(ctx, names, times) {
     ctx.textBaseline = 'bottom';
     ctx.fillText(Math.floor(times[i]), initialX + (indent + barWidth) * i, initialY + times[i] * -step);
   }
-}
+};
