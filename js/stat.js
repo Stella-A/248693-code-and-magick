@@ -1,7 +1,17 @@
 'use strict';
 
-window.renderStatistics = function (ctx, names, times) {
-  ctx.fillStyle = 'rgb(256, 256, 256)';
+var PLAYER = 'Вы';
+var COLOR_BLACK = 'rgb(0, 0, 0)';
+var COLOR_WHITE = 'rgb(256, 256, 256)';
+var COLOR_RED = 'rgba(255, 0, 0, 1)';
+var HISTOGRAM_HEIGHT = 150;
+var BAR_WIDTH = 40;
+var INDENT = 50;
+var INITIAL_X = 130;
+var INITIAL_Y = 250;
+
+var drawCloud = function (ctx) {
+  ctx.fillStyle = COLOR_WHITE;
   ctx.beginPath();
   ctx.moveTo(100, 10);
   ctx.bezierCurveTo(120, -20, 250, 30, 200, 15);
@@ -17,40 +27,57 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.closePath();
   ctx.stroke();
   ctx.fill();
+}
 
-  ctx.fillStyle = 'rgb(0, 0, 0)';
+var getMaxElement = function (arr) {
+  var max = -1;
+
+  for (var i = 0; i < arr.length; i++) {
+    var num = arr[i];
+    if (num > max) {
+      max = num;
+    }
+  }
+
+  return max;
+}
+
+var getRandomNumber = function (min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var getRandomShadeColor = function (r, g, b) {
+  return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + getRandomNumber(0.1, 1) + ')';
+}
+
+var renderingHistogramColumn = function (ctx, x, y, width, height, offset, iteration) {
+  x = x + (offset + width) * iteration;
+  ctx.fillRect(x, y, width, height);
+}
+
+window.renderStatistics = function (ctx, names, times) {
+
+  drawCloud(ctx);
+
+  ctx.fillStyle = COLOR_BLACK;
   ctx.font = '16px PT Mono';
   ctx.shadowColor = 'rgba(0, 0, 0, 0.0)';
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
-  var max = -1;
-
-  for (var i = 0; i < times.length; i++) {
-    var time = times[i];
-    if (time > max) {
-      max = time;
-    }
-  }
-
-  var histogramHeight = 150;
-  var step = histogramHeight / (max - 0);
-
-  var barWidth = 40;
-  var indent = 50;
-  var initialX = 130;
-  var initialY = 250;
+  var step = HISTOGRAM_HEIGHT / (getMaxElement(times) - 0);
 
   for (var j = 0; j < times.length; j++) {
-    ctx.fillStyle = 'rgba(2, 14, 134, ' + (Math.random() * (1 - 0.1) + 0.1) + ')';
-    if (names[j] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    ctx.fillStyle = getRandomShadeColor(0, 0, 255);
+    if (names[j] === PLAYER) {
+      ctx.fillStyle = COLOR_RED;
     }
-    ctx.fillRect(initialX + (indent + barWidth) * j, initialY, barWidth, times[j] * -step);
-    ctx.fillStyle = 'rgb(0, 0, 0)';
+
+    renderingHistogramColumn(ctx, INITIAL_X, INITIAL_Y, BAR_WIDTH, times[j] * -step, INDENT, j);
+    ctx.fillStyle = COLOR_BLACK;
     ctx.textBaseline = 'top';
-    ctx.fillText(names[j], initialX + (indent + barWidth) * j, initialY);
+    ctx.fillText(names[j], INITIAL_X + (INDENT + BAR_WIDTH) * j, INITIAL_Y);
     ctx.textBaseline = 'bottom';
-    ctx.fillText(Math.floor(times[j]), initialX + (indent + barWidth) * j, initialY + times[j] * -step);
+    ctx.fillText(Math.round(times[j]), INITIAL_X + (INDENT + BAR_WIDTH) * j, INITIAL_Y + times[j] * -step);
   }
 };
