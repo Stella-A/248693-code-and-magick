@@ -4,6 +4,9 @@ var PLAYER = 'Вы';
 var COLOR_BLACK = 'rgb(0, 0, 0)';
 var COLOR_WHITE = 'rgb(256, 256, 256)';
 var COLOR_RED = 'rgba(255, 0, 0, 1)';
+var COLOR_BLACK_TRANSPARENT = 'rgba(0, 0, 0, 0.7)';
+var COLOR_TRANSPARENT = 'rgba(0, 0, 0, 0.0)';
+var FONT = '16px PT Mono';
 var HISTOGRAM_HEIGHT = 150;
 var BAR_WIDTH = 40;
 var INDENT = 50;
@@ -23,11 +26,11 @@ var drawCloud = function (ctx) {
   ctx.lineTo(100, 10);
   ctx.shadowOffsetX = 10;
   ctx.shadowOffsetY = 10;
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+  ctx.shadowColor = COLOR_BLACK_TRANSPARENT;
   ctx.closePath();
   ctx.stroke();
   ctx.fill();
-}
+};
 
 var getMaxElement = function (arr) {
   var max = -1;
@@ -40,28 +43,28 @@ var getMaxElement = function (arr) {
   }
 
   return max;
-}
+};
 
 var getRandomNumber = function (min, max) {
   return Math.random() * (max - min) + min;
-}
+};
 
 var getRandomShadeColor = function (r, g, b) {
   return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + getRandomNumber(0.1, 1) + ')';
-}
+};
 
 var renderingHistogramColumn = function (ctx, x, y, width, height, offset, iteration) {
   x = x + (offset + width) * iteration;
   ctx.fillRect(x, y, width, height);
-}
+};
 
 window.renderStatistics = function (ctx, names, times) {
 
   drawCloud(ctx);
 
   ctx.fillStyle = COLOR_BLACK;
-  ctx.font = '16px PT Mono';
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.0)';
+  ctx.font = FONT;
+  ctx.shadowColor = COLOR_TRANSPARENT;
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
