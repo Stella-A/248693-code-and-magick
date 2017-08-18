@@ -6,7 +6,7 @@ var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 16
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var getRandomInteger = function (min, max) {
-  var rand = min - 0.5 + Math.random() * (max - min + 1)
+  var rand = min - 0.5 + Math.random() * (max - min + 1);
   rand = Math.round(rand);
 
   return rand;
@@ -29,8 +29,8 @@ for (var j = 0; j < 4; j++) {
     name: getRandomElement(WIZARD_FIRST_NAMES) + ' ' + getRandomElement(WIZARD_SECOND_NAMES),
     coatColor: getRandomElement(WIZARD_COATS),
     eyesColor: getRandomElement(WIZARD_EYES)
-  }
-};
+  };
+}
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -45,7 +45,7 @@ var renderWizard = function (wizard) {
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
-};
+}
 similarListElement.appendChild(fragment);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
