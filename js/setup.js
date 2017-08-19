@@ -26,7 +26,7 @@ var createWizard = function (arr) {
   }
 
   return wizards;
-}
+};
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -46,7 +46,7 @@ var fillDOM = function (arr) {
   }
 
   similarListElement.appendChild(fragment);
-}
+};
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
