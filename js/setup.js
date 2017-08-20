@@ -16,7 +16,7 @@ var getRandomElement = function (arr) {
   return arr[getRandomInteger(0, arr.length - 1)];
 };
 
-var createWizard = function (arr) {
+var createWizards = function (arr) {
   for (var j = 0; j < 4; j++) {
     arr[j] = {
       name: getRandomElement(WIZARD_FIRST_NAMES) + ' ' + getRandomElement(WIZARD_SECOND_NAMES),
@@ -24,8 +24,6 @@ var createWizard = function (arr) {
       eyesColor: getRandomElement(WIZARD_EYES)
     };
   }
-
-  return wizards;
 };
 
 var renderWizard = function (wizard) {
@@ -57,7 +55,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 
 var wizards = [];
 
-createWizard(wizards);
+createWizards(wizards);
 
 fillDOM(wizards);
 
