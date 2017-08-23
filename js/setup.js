@@ -90,19 +90,9 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-closeButton.addEventListener('click', function () {
-  closePopup();
-});
-
-closeButton.addEventListener('keydown', function () {
-  if (evt.keyCode === ENTER_KEYCODE) {
-    closePopup();
-  }
-});
-
 var userNameInput = setup.querySelector('.setup-user-name');
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (!userNameInput.validity.valid) {
     if (userNameInput.validity.tooShort) {
       userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
@@ -122,6 +112,20 @@ userNameInput.addEventListener('input', function (evt) {
     target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   } else {
     target.setCustomValidity('');
+  }
+});
+
+closeButton.addEventListener('click', function () {
+  if (userNameInput.validity.valid) {
+    closePopup();
+  }
+});
+
+closeButton.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    if (userNameInput.validity.valid) {
+      closePopup();
+    }
   }
 });
 
