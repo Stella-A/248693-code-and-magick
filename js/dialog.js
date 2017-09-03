@@ -1,13 +1,9 @@
 'use strict';
-(function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
 
+(function () {
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      if (!(userNameInput === document.activeElement)) {
-        closePopup();
-      }
+    if (!(userNameInput === document.activeElement)) {
+      window.util.isEscEvent(evt, closePopup);
     }
   };
 
@@ -32,9 +28,7 @@
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      openPopup();
-    }
+    window.util.isEnterEvent(evt, openPopup);
   });
 
   setupClose.addEventListener('click', function () {
@@ -42,9 +36,7 @@
   });
 
   setupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      closePopup();
-    }
+    window.util.isEnterEvent(evt, closePopup);
   });
 
   userNameInput.addEventListener('invalid', function () {
@@ -77,10 +69,8 @@
   });
 
   closeButton.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      if (userNameInput.validity.valid) {
-        closePopup();
-      }
+    if (userNameInput.validity.valid) {
+      window.util.isEnterEvent(evt, closePopup);
     }
   });
 })();
