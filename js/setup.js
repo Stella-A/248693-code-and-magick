@@ -6,6 +6,10 @@
   var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
   var WIZARD_FIREBALLS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+  var CELL_ARTEFACT = 'setup-artifacts-cell';
+  var NONE_CHILD_ELEMENT = 0;
+  var COLOR_YELLOW = 'yellow';
+  var COLOR_NONE = '';
 
   var createWizards = function (arr) {
     for (var j = 0; j < 4; j++) {
@@ -44,6 +48,9 @@
   var wizardCoat = setupPlayer.querySelector('.wizard-coat');
   var wizardEyes = setupPlayer.querySelector('.wizard-eyes');
   var setupFireballWrap = setupPlayer.querySelector('.setup-fireball-wrap');
+  var shopElement = setup.querySelector('.setup-artifacts-shop');
+  var artifactsElement = setup.querySelector('.setup-artifacts');
+  var draggedItem = null;
   var wizards = [];
 
   createWizards(wizards);
@@ -62,5 +69,42 @@
 
   setupFireballWrap.addEventListener('click', function () {
     setupFireballWrap.style.backgroundColor = WIZARD_FIREBALLS[window.util.getRandomInteger(0, WIZARD_FIREBALLS.length - 1)];
+  });
+
+  shopElement.addEventListener('dragstart', function (evt) {
+    if (evt.target.tagName.toLowerCase() === 'img') {
+      draggedItem = evt.target;
+      evt.dataTransfer.setData('text/plain', evt.target.alt);
+    }
+  });
+
+  artifactsElement.addEventListener('dragover', function (evt) {
+    evt.preventDefault();
+    return false;
+  });
+
+  artifactsElement.addEventListener('drop', function (evt) {
+    if (evt.target.className === CELL_ARTEFACT && evt.target.childElementCount === NONE_CHILD_ELEMENT) {
+      evt.target.appendChild(draggedItem.cloneNode());
+      evt.target.style.backgroundColor = COLOR_NONE;
+      evt.target.style.outline = 'none';
+      evt.preventDefault();
+    }
+  });
+
+  artifactsElement.addEventListener('dragenter', function (evt) {
+    if (evt.target.className === CELL_ARTEFACT && evt.target.childElementCount === NONE_CHILD_ELEMENT) {
+      evt.target.style.backgroundColor = COLOR_YELLOW;
+      evt.target.style.outline = '2px dashed red';
+      evt.preventDefault();
+    }
+  });
+
+  artifactsElement.addEventListener('dragleave', function (evt) {
+    if (evt.target.className === CELL_ARTEFACT && evt.target.childElementCount === NONE_CHILD_ELEMENT) {
+      evt.target.style.backgroundColor = COLOR_NONE;
+      evt.target.style.outline = 'none';
+      evt.preventDefault();
+    }
   });
 })();
