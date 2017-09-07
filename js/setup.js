@@ -50,7 +50,6 @@
   var setupFireballWrap = setupPlayer.querySelector('.setup-fireball-wrap');
   var shopElement = setup.querySelector('.setup-artifacts-shop');
   var artifactsElement = setup.querySelector('.setup-artifacts');
-  var artifactCell = setup.querySelector('.setup-artifacts-cell');
   var draggedItem = null;
   var wizards = [];
 
