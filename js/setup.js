@@ -59,11 +59,11 @@
 
   setup.querySelector('.setup-similar').classList.remove('hidden');
 
-  var fillElement = function(elem, arr) {
+  var fillElement = function (elem, arr) {
     elem.style.fill = arr[window.util.getRandomInteger(0, arr.length - 1)];
   };
 
-  var changeElementBackground = function(elem, arr) {
+  var changeElementBackground = function (elem, arr) {
     elem.style.backgroundColor = arr[window.util.getRandomInteger(0, arr.length - 1)];
   };
 
