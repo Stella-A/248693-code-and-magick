@@ -866,3 +866,14 @@ input[type=radio]:checked + .review-mark-label {
   left: 0;
   top: 0;
 }
+
+.error-message {
+  z-index: 100;
+  margin: 0 auto;
+  text-align: center;
+  background-color: red;
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 30px;
+}
