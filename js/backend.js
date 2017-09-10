@@ -1,7 +1,8 @@
 'use strict';
 
 (function () {
-  var SERVER_URL = 'https://1510.dump.academy/code-and-magick';
+  var SERVER_URL_SAVE = 'https://1510.dump.academy/code-and-magick';
+  var SERVER_URL_LOAD = 'https://1510.dump.academy/code-and-magick/data';
 
   var setup = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -30,13 +31,13 @@
     save: function (data, onLoad, onError) {
       var xhr = setup(onLoad, onError);
 
-      xhr.open('POST', SERVER_URL);
+      xhr.open('POST', SERVER_URL_SAVE);
       xhr.send(data);
     },
     load: function (onLoad, onError) {
       var xhr = setup(onLoad, onError);
 
-      xhr.open('GET', SERVER_URL + '/data');
+      xhr.open('GET', SERVER_URL_LOAD);
       xhr.send();
     }
   };
