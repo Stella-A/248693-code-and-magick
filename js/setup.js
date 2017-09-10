@@ -105,7 +105,7 @@
   });
 
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), function (response) {
+    window.backend.save(new FormData(form), function () {
       setup.classList.add('hidden');
     });
     evt.preventDefault();
