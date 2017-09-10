@@ -59,17 +59,17 @@
 
   setup.querySelector('.setup-similar').classList.remove('hidden');
 
-  wizardCoat.addEventListener('click', function () {
-    wizardCoat.style.fill = WIZARD_COATS[window.util.getRandomInteger(0, WIZARD_COATS.length - 1)];
-  });
+  var fillElement = function (elem, arr) {
+    elem.style.fill = arr[window.util.getRandomInteger(0, arr.length - 1)];
+  };
 
-  wizardEyes.addEventListener('click', function () {
-    wizardEyes.style.fill = WIZARD_EYES[window.util.getRandomInteger(0, WIZARD_EYES.length - 1)];
-  });
+  var changeElementBackground = function (elem, arr) {
+    elem.style.backgroundColor = arr[window.util.getRandomInteger(0, arr.length - 1)];
+  };
 
-  setupFireballWrap.addEventListener('click', function () {
-    setupFireballWrap.style.backgroundColor = WIZARD_FIREBALLS[window.util.getRandomInteger(0, WIZARD_FIREBALLS.length - 1)];
-  });
+  window.colorizeElement(wizardCoat, WIZARD_COATS, fillElement);
+  window.colorizeElement(wizardEyes, WIZARD_EYES, fillElement);
+  window.colorizeElement(setupFireballWrap, WIZARD_FIREBALLS, changeElementBackground);
 
   shopElement.addEventListener('dragstart', function (evt) {
     if (evt.target.tagName.toLowerCase() === 'img') {
