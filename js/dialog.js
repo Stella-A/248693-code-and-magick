@@ -2,22 +2,22 @@
 
 (function () {
   var onPopupEscPress = function (evt) {
-    if (!(userNameInput === document.activeElement)) {
+    if (!(userNameInputElement === document.activeElement)) {
       window.util.isEscEvent(evt, closePopup);
     }
   };
 
   var openPopup = function () {
-    setup.classList.remove('hidden');
+    setupElement.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
-    dialogHandle.addEventListener('mousedown', onDialogHandleMousedown);
+    dialogHandleElement.addEventListener('mousedown', onDialogHandleMousedown);
   };
 
   var closePopup = function () {
-    setup.classList.add('hidden');
+    setupElement.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
-    dialogHandle.removeEventListener('mousedown', onDialogHandleMousedown);
-    setup.removeAttribute('style');
+    dialogHandleElement.removeEventListener('mousedown', onDialogHandleMousedown);
+    setupElement.removeAttribute('style');
   };
 
   var onDialogHandleMousedown = function (evt) {
@@ -56,44 +56,44 @@
     document.addEventListener('mouseup', onMouseUp);
   };
 
-  var setup = document.querySelector('.setup');
-  var setupOpen = document.querySelector('.setup-open');
-  var setupClose = setup.querySelector('.setup-close');
-  var closeButton = setup.querySelector('.setup-submit');
-  var userNameInput = setup.querySelector('.setup-user-name');
-  var dialogHandle = setup.querySelector('.setup-user-pic');
+  var setupElement = document.querySelector('.setup');
+  var setupOpenElement = document.querySelector('.setup-open');
+  var setupCloseElement = setupElement.querySelector('.setup-close');
+  var closeButtonElement = setupElement.querySelector('.setup-submit');
+  var userNameInputElement = setupElement.querySelector('.setup-user-name');
+  var dialogHandleElement = setupElement.querySelector('.setup-user-pic');
 
-  setupOpen.addEventListener('click', function () {
+  setupOpenElement.addEventListener('click', function () {
     openPopup();
   });
 
-  setupOpen.addEventListener('keydown', function (evt) {
+  setupOpenElement.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, openPopup);
   });
 
-  setupClose.addEventListener('click', function () {
+  setupCloseElement.addEventListener('click', function () {
     closePopup();
   });
 
-  setupClose.addEventListener('keydown', function (evt) {
+  setupCloseElement.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, closePopup);
   });
 
-  userNameInput.addEventListener('invalid', function () {
-    if (!userNameInput.validity.valid) {
-      if (userNameInput.validity.tooShort) {
-        userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-      } else if (userNameInput.validity.tooLong) {
-        userNameInput.setCustomValidity('Имя не должно превышать 50-ти символов');
-      } else if (userNameInput.validity.valueMissing) {
-        userNameInput.setCustomValidity('Обязательное поле');
+  userNameInputElement.addEventListener('invalid', function () {
+    if (!userNameInputElement.validity.valid) {
+      if (userNameInputElement.validity.tooShort) {
+        userNameInputElement.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+      } else if (userNameInputElement.validity.tooLong) {
+        userNameInputElement.setCustomValidity('Имя не должно превышать 50-ти символов');
+      } else if (userNameInputElement.validity.valueMissing) {
+        userNameInputElement.setCustomValidity('Обязательное поле');
       } else {
-        userNameInput.setCustomValidity('');
+        userNameInputElement.setCustomValidity('');
       }
     }
   });
 
-  userNameInput.addEventListener('input', function (evt) {
+  userNameInputElement.addEventListener('input', function (evt) {
     var target = evt.target;
     if (target.value.length < 2) {
       target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
@@ -102,14 +102,14 @@
     }
   });
 
-  closeButton.addEventListener('click', function () {
-    if (userNameInput.validity.valid) {
+  closeButtonElement.addEventListener('click', function () {
+    if (userNameInputElement.validity.valid) {
       closePopup();
     }
   });
 
-  closeButton.addEventListener('keydown', function (evt) {
-    if (userNameInput.validity.valid) {
+  closeButtonElement.addEventListener('keydown', function (evt) {
+    if (userNameInputElement.validity.valid) {
       window.util.isEnterEvent(evt, closePopup);
     }
   });
