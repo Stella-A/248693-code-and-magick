@@ -41,8 +41,8 @@
         y: moveEvt.clientY
       };
 
-      setup.style.top = (setup.offsetTop - shift.y) + 'px';
-      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+      setupElement.style.top = (setupElement.offsetTop - shift.y) + 'px';
+      setupElement.style.left = (setupElement.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {

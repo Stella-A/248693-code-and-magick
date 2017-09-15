@@ -11,7 +11,7 @@
   var wizardEyesElement = setupPlayerElement.querySelector('.wizard-eyes');
   var setupFireballWrapElement = setupPlayerElement.querySelector('.setup-fireball-wrap');
 
-  var fillElement = function (elem, arr, changeColor) {
+  var fillElement = function (elem, arr) {
     var newColor = arr[window.util.getRandomInteger(0, arr.length - 1)];
 
     elem.style.fill = newColor;
@@ -28,13 +28,15 @@
   };
 
   var wizard = {
-    onEyesChange: function (color) {},
-    onCoatChange: function (color) {}
+    onEyesChange: function () {},
+    onCoatChange: function () {}
   };
 
   window.colorizeElement(wizardCoatElement, WIZARD_COATS, fillElement);
   window.colorizeElement(wizardEyesElement, WIZARD_EYES, fillElement);
   window.colorizeElement(setupFireballWrapElement, WIZARD_FIREBALLS, changeElementBackground);
 
-  return window.wizard = wizard;
+  window.wizard = wizard;
+
+  return window.wizard;
 })();
