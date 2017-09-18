@@ -40,17 +40,17 @@
     }));
   };
 
-  var successHandler = function (data) {
+  var onLoadSuccess = function (data) {
     wizards = data;
     updateWizards();
   };
 
-  var errorHandler = function (errorMessage) {
+  var onLoadError = function (errorMessage) {
     var node = document.createElement('div');
     node.classList.add('error-message');
 
     node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
+    document.body.prepend(node);
   };
 
   window.wizard.onEyesChange = function (color) {
@@ -63,5 +63,5 @@
     window.debounce(updateWizards);
   };
 
-  window.backend.load(successHandler, errorHandler);
+  window.backend.load(onLoadSuccess, onLoadError);
 })();

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var MAX_WIZARD_RENDER_COUNT = 4;
   var setupElement = document.querySelector('.setup');
   var similarElement = setupElement.querySelector('.setup-similar');
   var similarListElement = setupElement.querySelector('.setup-similar-list');
@@ -17,7 +18,7 @@
   };
 
   window.render = function (data) {
-    var takeNumber = data.length > 4 ? 4 : data.length;
+    var takeNumber = data.length > MAX_WIZARD_RENDER_COUNT ? MAX_WIZARD_RENDER_COUNT : data.length;
 
     similarListElement.innerHTML = '';
     for (var i = 0; i < takeNumber; i++) {
